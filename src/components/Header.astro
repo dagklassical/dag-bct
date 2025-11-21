@@ -1,0 +1,54 @@
+---
+// src/components/Header.astro
+import Link from 'astro:link'
+import Image from 'astro:image'
+import { SITE } from '../config/dag.config' // Asegúrate de tener este archivo
+---
+
+<header class="header-sticky border-b border-dag-platinum">
+  <div class="container-max section-padding">
+    <div class="flex justify-between items-center h-20">
+      {/* Logo */}
+      <Link href="/" class="flex items-center space-x-3 group">
+        <div class="relative p-1 bg-dag-white rounded-full">
+          <Image 
+            src="/images/logo-dagklassical-orig-001.svg" // Asegúrate de que el archivo exista en public/images/
+            alt="DAG Klassical"
+            width={48}
+            height={48}
+            class="group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+        <div>
+          <div class="text-xl font-light text-dag-burgundy tracking-wide">DAG</div>
+          <div class="text-xs font-medium text-dag-platinum -mt-1">KLASSICAL</div>
+        </div>
+      </Link>
+
+      {/* Navegación Desktop */}
+      <nav class="hidden md:flex space-x-8">
+        {SITE.navigation.map((item) => (
+          <Link
+            href={item.href}
+            class="header-nav-item" // Usa la clase definida en globals.css con @apply
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
+
+      {/* Botón Menú Móvil */}
+      <button class="md:hidden text-dag-burgundy focus:outline-none">
+        <!-- Icono de menú hamburguesa -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    {/* Navegación Móvil (Oculta por defecto) */}
+    <!-- Puedes añadir la lógica de visibilidad con AlpineJS o HTMX si lo deseas -->
+  </div>
+</header>

@@ -1,0 +1,40 @@
+---
+// src/layouts/Layout.astro
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+// Define las props que recibirá este layout
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+// Asigna valores por defecto si no se pasan
+const { title, description = "DAG Klassical - Música Clásica Premium" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} | DAG Klassical</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Asegúrate de que Tailwind CSS y tus estilos globales estén enlazados aquí -->
+    <link rel="stylesheet" href="/global.css" />
+    <!-- Montserrat se carga como variable CSS desde layout.tsx en Next.js, en Astro se carga diferente -->
+    <!-- La forma más común en Astro es usar @fontsource-variable o incluir una etiqueta <link> aquí -->
+    <!-- Si usas @fontsource-variable/montserrat (como se instaló antes), se carga en el CSS global -->
+    <!-- Si usas la etiqueta <link>, se puede hacer aquí -->
+    <!-- Opcional: Cargar Advent Pro aquí también si se va a usar globalmente -->
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100;300;400;500;700&display=swap" /> -->
+  </head>
+  <body class="bg-dag-white text-dag-black font-sans"> {/* Aplica la fuente por defecto */}
+    <Header />
+    <main>
+      <slot /> {/* Aquí se inyecta el contenido de la página específica */}
+    </main>
+    <Footer />
+  </body>
+</html>
